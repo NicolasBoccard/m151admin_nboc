@@ -23,6 +23,13 @@ label
     margin: auto;
 }
 
+textarea
+{
+    width: 167px;
+    height: 100px;
+    resize: none;
+}
+
 #formulaire
 {
     width: 400px;

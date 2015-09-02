@@ -5,7 +5,7 @@
   Author     : Nicolas Boccard
  */
 
-function afficher_profil($tableau)
+function afficher_profil_general($tableau)
 {
     for ($i = 0; $i < count($tableau); $i++)
     {

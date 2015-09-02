@@ -18,7 +18,7 @@ $tableau_profil = recuperer_profil();
     </head>
     <body>
         <form method="get" action="profil.php">
-            <?php afficher_profil($tableau_profil)?>
+            <?php $tableau_profil_general = afficher_profil_general($tableau_profil)?>
         </form>
     </body>
 </html>

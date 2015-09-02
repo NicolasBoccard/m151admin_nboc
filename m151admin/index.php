@@ -8,7 +8,7 @@ require_once('fonctions.php');
 
 if(isset($_POST['inscription']))
 {
-    inscription($_POST['nom'], $_POST['prenom'], $_POST['date_naissance'], $_POST['description'], $_POST['email'], $_POST['pseudo'], $_POST['mot_de_passe']);
+    inscription($_POST['nom'], $_POST['prenom'], $_POST['date_naissance'], $_POST['description'], $_POST['email'], md5($_POST['pseudo']), $_POST['mot_de_passe']);
 }
 
 if(isset($_POST['effacer']))

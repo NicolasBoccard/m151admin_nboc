@@ -66,3 +66,10 @@ function inscription($nom,$prenom,$date_naissance,$description,$email,$pseudo,$m
             . "\"$description\", \"$email\", \"$pseudo\", \"$mot_de_passe\")";
     requete($requete);
 }
+
+function recuperer_profil()
+{
+    $requete = "SELECT * FROM utilisateurs;";
+    $resultat = requete($requete);
+    return $resultat;
+}

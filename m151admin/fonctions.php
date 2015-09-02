@@ -9,7 +9,7 @@ require_once('sql.php');
 
 /**
  * Fonction pour se connecter à la base donées
- * @staticvar type $connexion
+ * @staticvar type $connexion //Connexion établie ou non
  * @return \PDO
  */
 function connexion()

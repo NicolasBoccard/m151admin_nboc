@@ -29,28 +29,28 @@ if(isset($_POST['effacer']))
         <div id="formulaire">
             <form  method="POST" action="index.php">
                 <label for="nom">Nom :</label>
-                <input type="text" id="nom" name="nom"/><br/>
+                <input type="text" id="nom" name="nom" required/><br/>
                 
                 <label for="prenom">Prénom :</label>
-                <input type="text" id="prenom" name="prenom"/><br/>
+                <input type="text" id="prenom" name="prenom" required/><br/>
                 
                 <label for="date_naissance">Date de naissance :</label>
-                <input type="date" id="date_naissance" name="date_naissance"></textarea><br/>
+                <input type="date" id="date_naissance" name="date_naissance" required></textarea><br/>
                 
                 <label for="description">Description :</label>
-                <textarea id="description" name="description"></textarea><br/>
+                <textarea id="description" name="description" required></textarea><br/>
                 
                 <label for="email">Email :</label>
-                <input type="email" id="email" name="email"/><br/>
+                <input type="email" id="email" name="email" required/><br/>
                 
                 <label for="pseudo">Pseudo :</label>
-                <input type="text" id="pseudo" name="pseudo"/><br/>
+                <input type="text" id="pseudo" name="pseudo" required/><br/>
                 
                 <label for="mot_de_passe">Mot de passe :</label>
-                <input type="password" id="mot_de_passe" name="mot_de_passe"/><br/>
+                <input type="password" id="mot_de_passe" name="mot_de_passe" required/><br/>
                 
                 <input type="submit" name="inscription" value="Inscription"/>
-                <input type="submit" name="effacer" value="Effacer"/>
+                <input type="reset" name="effacer" value="Effacer"/>
             </form>
         </div>
     </body>

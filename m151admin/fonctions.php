@@ -13,7 +13,7 @@ require_once('sql.php');
  * @return \PDO
  */
 function connexion()
-{
+{ 
     static $connexion = null;
 
     if ($connexion == null)

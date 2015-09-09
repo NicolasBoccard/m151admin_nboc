@@ -83,3 +83,8 @@ function recuperer_profil_detail($id)
     $resultat = requete($requete);
     return $resultat;
 }
+
+function modifier_profil($param)
+{
+    
+}

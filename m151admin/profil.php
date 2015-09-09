@@ -22,7 +22,7 @@ $tableau_profil = recuperer_profil_general();
     </head>
     <body>
         <form method="get" action="profil.php">
-            <?php $tableau_profil_general = afficher_profil_general($tableau_profil)?>
+            <?php $tableau_profil_general = afficher_profil($tableau_profil)?>
         </form>
     </body>
 </html>

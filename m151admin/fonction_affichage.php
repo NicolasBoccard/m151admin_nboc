@@ -6,7 +6,7 @@
  */
 require_once('fonctions_bdd.php');
 
-function afficher_profil_general($tableau)
+function afficher_profil($tableau)
 {
     $profil_choisit = FALSE;
     for ($i = 0; $i < count($tableau); $i++)
@@ -19,7 +19,14 @@ function afficher_profil_general($tableau)
     }
     if($profil_choisit == FALSE)
     {
-        echo "<table id=\"tableau_profil_general\">";
+        afficher_profil_general($tableau);
+    }
+    
+}
+
+function afficher_profil_general($tableau)
+{
+    echo "<table id=\"tableau_profil_general\">";
         for($i = 0; $i < count($tableau); $i++)
         {
             echo "<tr>";
@@ -31,21 +38,19 @@ function afficher_profil_general($tableau)
             }
             echo "<td>"
             .    "<a href=\"profil.php?" . $tableau[$i][0] . "\">détail</a>"
-            //.    "<input type=\"submit\" name=" . $tableau[$i][0] . " value=\"détail\"/>"
             .    "</td>"
             .    "<td>"
-            .    "<a href=\"inscription.php?" . $tableau[$i][0] . "\">modifier</a>"
+            .    "<a href=\"inscription.php?id_user=" . $tableau[$i][0] . "\">modifier</a>"
             .    "</td>";
             echo "</tr>";
         }
-    }
-    
 }
 
 function afficher_profil_detail($id)
 {
     $tableau = recuperer_profil_detail($id);
     echo "<table id=\"tableau_profil_detail\">";
+    
     for($i = 0; $i < count($tableau); $i++)
     {
         for ($j = 1; $j < count($tableau[$i]); $j++)

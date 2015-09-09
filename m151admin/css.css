@@ -36,3 +36,15 @@ textarea
     height: 100%;
     margin: auto;
 }
+
+#tableau_profil_general
+{
+    border: solid 1px black;
+    margin: auto;
+}
+
+#tableau_profil_detail
+{
+    border: solid 1px black;
+    margin: auto;
+}

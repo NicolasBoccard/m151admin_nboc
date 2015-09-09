@@ -8,7 +8,7 @@ require_once('fonctions_bdd.php');
 
 if(isset($_POST['inscription']))
 {
-    inscription($_POST['nom'], $_POST['prenom'], $_POST['date_naissance'], $_POST['description'], $_POST['email'], md5($_POST['pseudo']), $_POST['mot_de_passe']);
+    inscription($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_naissance'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['pseudo'], md5($_REQUEST['mot_de_passe']));
 }
 
 ?>

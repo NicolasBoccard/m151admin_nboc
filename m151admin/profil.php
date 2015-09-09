@@ -7,14 +7,18 @@
 require_once('fonctions_bdd.php');
 require_once('fonction_affichage.php');
 
-$tableau_profil = recuperer_profil();
+$tableau_profil = recuperer_profil_general();
+
+
 ?>
 
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css.css">
     </head>
     <body>
         <form method="get" action="profil.php">

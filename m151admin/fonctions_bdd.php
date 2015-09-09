@@ -21,6 +21,7 @@ function connexion()
         try
         {
             $bdd = new PDO('mysql:host=' . BD_HOST. ';dbname=' . BD_NAME . '', BD_USER, BD_PASSWORD);
+            $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch (Exception $e)
         {
@@ -59,17 +60,26 @@ REQUETE;
  */
 function inscription($nom,$prenom,$date_naissance,$description,$email,$pseudo,$mot_de_passe)
 {
-    $requete = "INSERT INTO utilisateurs(nom_utilisateurs, prenom_utilisateurs,"
-            . " date_de_naissance_utilisateurs, description_utilisateurs, "
-            . "email_utilisateurs, pseudo_utilisateurs, mot_de_passe_utilisateurs)"
-            . " VALUES(\"$nom\", \"$prenom\", \"$date_naissance\", "
-            . "\"$description\", \"$email\", \"$pseudo\", \"$mot_de_passe\")";
+    $requete = <<< REQUETE
+            INSERT INTO utilisateurs(nom_utilisateurs, prenom_utilisateurs,
+            date_de_naissance_utilisateurs, description_utilisateurs,
+            email_utilisateurs, pseudo_utilisateurs, mot_de_passe_utilisateurs)
+            VALUES("$nom", "$prenom", "$date_naissance", 
+            "$description", "$email", "$pseudo", "$mot_de_passe");
+REQUETE;
     requete($requete);
 }
 
-function recuperer_profil()
+function recuperer_profil_general()
 {
     $requete = "SELECT * FROM utilisateurs;";
+    $resultat = requete($requete);
+    return $resultat;
+}
+
+function recuperer_profil_detail($id)
+{
+    $requete = "SELECT * FROM utilisateurs WHERE id_utilisateurs = $id";
     $resultat = requete($requete);
     return $resultat;
 }

@@ -30,7 +30,11 @@ function afficher_profil_general($tableau)
                 echo "</td>";
             }
             echo "<td>"
-            .    "<input type=\"submit\" name=" . $tableau[$i][0] . " value=\"détail\"/>"
+            .    "<a href=\"profil.php?" . $tableau[$i][0] . "\">détail</a>"
+            //.    "<input type=\"submit\" name=" . $tableau[$i][0] . " value=\"détail\"/>"
+            .    "</td>"
+            .    "<td>"
+            .    "<a href=\"inscription.php?" . $tableau[$i][0] . "\">modifier</a>"
             .    "</td>";
             echo "</tr>";
         }

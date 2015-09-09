@@ -48,3 +48,12 @@ textarea
     border: solid 1px black;
     margin: auto;
 }
+
+a
+{
+    border: solid 1px gray;
+    background-color: lightblue;
+    border-radius: 3px;
+    text-decoration: none;
+    color: black;
+}

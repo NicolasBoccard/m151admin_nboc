@@ -6,7 +6,12 @@
 
 require_once('fonctions_bdd.php');
 $modification = FALSE;
-
+if(isset($_REQUEST['annuler']))
+{
+    header('Location: profil.php');
+}
+else
+{
 if(isset($_REQUEST['inscription']))
 {
     inscription($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_naissance'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['pseudo'], md5($_REQUEST['mot_de_passe']));
@@ -14,13 +19,15 @@ if(isset($_REQUEST['inscription']))
 
 if(isset($_REQUEST['modification']))
 {
-    
+    modifier_profil($_REQUEST['id'], $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_naissance'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['pseudo'], md5($_REQUEST['mot_de_passe']));
+    header('Location: profil.php?' . $_REQUEST['id']);
 }
 
 if(isset($_REQUEST['id_user']))
 {
     $modification = TRUE;
     $tableau = recuperer_profil_detail($_REQUEST['id_user']);
+}
 }
 ?>
 
@@ -38,6 +45,7 @@ if(isset($_REQUEST['id_user']))
                 <?php if($modification == FALSE){?>
                 <input type="text" id="nom" name="nom" required/><br/>
                 <?php } else{?>
+                <input type="hidden" name="id" value=<?php echo "\"" . $tableau[0][0] . "\"";?>/>
                 <input type="text" id="nom" name="nom" value=<?php echo "\"" . $tableau[0][1] . "\"";?> required/><br/>
                 <?php }?>
                 
@@ -87,7 +95,8 @@ if(isset($_REQUEST['id_user']))
                 <input type="submit" name="inscription" value="Inscription"/>
                 <input type="reset" name="effacer" value="Effacer"/>
                 <?php } else{?>
-                <input type="submit" name="modification" value="Modifier"/>
+                <input id="a" type="submit" name="modification" value="Modifier"/>
+                <a id="annuler_modification" href="profil.php">Annuler<a/>
                 <?php }?>
             </form>
         </div>

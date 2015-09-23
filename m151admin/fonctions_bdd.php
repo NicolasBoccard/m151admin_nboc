@@ -40,10 +40,13 @@ function connexion()
 function requete($requete)
 {
     $bdd = connexion();
-    $sql = <<< REQUETE
-            $requete;
-REQUETE;
-    $donnees = $bdd->query($sql)->fetchAll(PDO::FETCH_NUM);
+    $donnees = $bdd->query($requete)->fetchAll(PDO::FETCH_NUM);
+    return $donnees;
+}
+
+function requete_update($requete) {
+    $bdd = connexion();
+    $donnees = $bdd->query($requete);
     return $donnees;
 }
 
@@ -84,7 +87,18 @@ function recuperer_profil_detail($id)
     return $resultat;
 }
 
-function modifier_profil($param)
+function modifier_profil($id,$nom,$prenom,$date_naissance,$description,$email,$pseudo,$mot_de_passe)
 {
-    
+    $requete = <<< REQUETE
+            UPDATE utilisateurs 
+            SET    nom_utilisateurs = "$nom",
+                   prenom_utilisateurs = "$prenom",
+                   date_de_naissance_utilisateurs = "$date_naissance",
+                   description_utilisateurs = "$description",
+                   email_utilisateurs = "$email",
+                   pseudo_utilisateurs = "$pseudo",
+                   mot_de_passe_utilisateurs = "$mot_de_passe"
+            WHERE  id_utilisateurs = "$id";
+REQUETE;
+    requete_update($requete);
 }

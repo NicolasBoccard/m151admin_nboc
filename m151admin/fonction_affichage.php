@@ -37,10 +37,10 @@ function afficher_profil_general($tableau)
                 echo "</td>";
             }
             echo "<td>"
-            .    "<a href=\"profil.php?" . $tableau[$i][0] . "\">détail</a>"
+            .    "<a id=\"btn_profil\" href=\"profil.php?" . $tableau[$i][0] . "\">détail</a>"
             .    "</td>"
             .    "<td>"
-            .    "<a href=\"inscription.php?id_user=" . $tableau[$i][0] . "\">modifier</a>"
+            .    "<a id=\"btn_profil\" href=\"inscription.php?id_user=" . $tableau[$i][0] . "\">modifier</a>"
             .    "</td>";
             echo "</tr>";
         }
@@ -62,4 +62,10 @@ function afficher_profil_detail($id)
                 echo "</tr>";
             }   
     }
+    echo "<tr>";
+    echo "<td>";
+    echo "<a id=\"annuler_modification\" href=\"profil.php\">Retour<a/>";
+    echo "</td>";
+    echo "</tr>";
+    echo "</table\">";
 }

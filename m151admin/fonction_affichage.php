@@ -11,10 +11,17 @@ function afficher_profil($tableau)
     $profil_choisit = FALSE;
     for ($i = 0; $i < count($tableau); $i++)
     {
-        if(isset($_GET[$tableau[$i][0]]))
+        if(isset($_REQUEST['id_user']) && $_REQUEST['id_user'] == $tableau[$i][0])
             {
+                if(isset($_REQUEST['action']) && $_REQUEST['action'] == "supprimer")
+                {
+                    echo "OK !";
+                }
+                else 
+                {
                 $profil_choisit = TRUE;
                 afficher_profil_detail($tableau[$i][0]);
+                }
             }
     }
     if($profil_choisit == FALSE)
@@ -37,11 +44,15 @@ function afficher_profil_general($tableau)
                 echo "</td>";
             }
             echo "<td>"
-            .    "<a id=\"btn_profil\" href=\"profil.php?" . $tableau[$i][0] . "\">détail</a>"
+            .    "<a id=\"btn_profil\" href=\"profil.php?id_user=" . $tableau[$i][0] . "\">détail</a>"
             .    "</td>"
             .    "<td>"
             .    "<a id=\"btn_profil\" href=\"inscription.php?id_user=" . $tableau[$i][0] . "\">modifier</a>"
-            .    "</td>";
+            .    "</td>"
+            .    "<td>"
+            .    "<a id=\"btn_profil\" href=\"profil.php?id_user=" . $tableau[$i][0] . "&action=supprimer\">supprimer</a>"
+            .    "</td>"
+            .    "</tr>";
             echo "</tr>";
         }
 }

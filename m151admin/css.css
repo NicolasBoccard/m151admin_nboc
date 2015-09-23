@@ -30,6 +30,15 @@ textarea
     resize: none;
 }
 
+input
+{
+    border: solid 1px gray;
+    background-color: lightblue;
+    border-radius: 3px;
+    text-decoration: none;
+    color: black;
+}
+
 #formulaire
 {
     width: 400px;

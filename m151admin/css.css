@@ -39,6 +39,11 @@ input
     color: black;
 }
 
+h1
+{
+    text-align: center;
+}
+
 #formulaire
 {
     width: 400px;
@@ -74,4 +79,13 @@ a
     border-radius: 3px;
     text-decoration: none;
     color: black;
+}
+
+#login
+{
+    width: 400px;
+    height: 100%;
+    margin: auto;
+    border: solid 2px black;
+    border-radius: 5px;
 }

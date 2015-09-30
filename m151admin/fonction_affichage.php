@@ -4,6 +4,7 @@
   Created on : 02 septembre 2015
   Author     : Nicolas Boccard
  */
+
 require_once('fonctions_bdd.php');
 
 function afficher_profil($tableau)
@@ -15,7 +16,8 @@ function afficher_profil($tableau)
             {
                 if(isset($_REQUEST['action']) && $_REQUEST['action'] == "supprimer")
                 {
-                    echo "OK !";
+                    supprimer_profil($tableau[$i][0]);
+                    header('Location: profil.php');
                 }
                 else 
                 {

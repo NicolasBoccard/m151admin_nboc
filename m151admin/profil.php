@@ -3,12 +3,17 @@
   Created on : 02 septembre 2015
   Author     : Nicolas Boccard
  */
+session_start();
 
 require_once('fonctions_bdd.php');
 require_once('fonction_affichage.php');
 
 $tableau_profil = recuperer_profil_general();
 
+if(isset($_SESSION['connecte']) && !$_SESSION['connecte'])
+{
+    header('Location: index.php');
+}
 
 ?>
 
@@ -23,6 +28,7 @@ $tableau_profil = recuperer_profil_general();
     <body>
         <form method="get" action="profil.php">
             <?php $tableau_profil_general = afficher_profil($tableau_profil)?>
+            <a href="deconnexion.php">déconnexion</a>
         </form>
     </body>
 </html>

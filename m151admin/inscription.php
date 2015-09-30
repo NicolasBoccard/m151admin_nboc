@@ -4,6 +4,8 @@
  *   Author     : Nicolas Boccard
  */
 
+session_start();
+
 require_once('fonctions_bdd.php');
 $modification = FALSE;
 if(isset($_REQUEST['annuler']))
@@ -94,6 +96,7 @@ if(isset($_REQUEST['id_user']))
                 <?php if($modification == FALSE){?>
                 <input type="submit" name="inscription" value="Inscription"/>
                 <input type="reset" name="effacer" value="Effacer"/>
+                <a id="annuler_inscription" href="index.php">Annuler<a/>
                 <?php } else{?>
                 <input id="a" type="submit" name="modification" value="Modifier"/>
                 <a id="annuler_modification" href="profil.php">Annuler<a/>

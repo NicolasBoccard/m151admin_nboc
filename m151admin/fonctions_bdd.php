@@ -3,7 +3,6 @@
     Created on : 26 août 2015
     Author     : Nicolas Boccard
 */
-
 require_once('sql.php');
 
 
@@ -37,14 +36,14 @@ function connexion()
  * @param type $requete // Requête à executer
  * @return type
  */
-function requete($requete)
+function requete_R($requete)
 {
     $bdd = connexion();
     $donnees = $bdd->query($requete)->fetchAll(PDO::FETCH_NUM);
     return $donnees;
 }
 
-function requete_update($requete) {
+function requete_CUD($requete) {
     $bdd = connexion();
     $donnees = $bdd->query($requete);
     return $donnees;
@@ -70,20 +69,20 @@ function inscription($nom,$prenom,$date_naissance,$description,$email,$pseudo,$m
             VALUES("$nom", "$prenom", "$date_naissance", 
             "$description", "$email", "$pseudo", "$mot_de_passe");
 REQUETE;
-    requete($requete);
+    requete_CUD($requete);
 }
 
 function recuperer_profil_general()
 {
     $requete = "SELECT * FROM utilisateurs;";
-    $resultat = requete($requete);
+    $resultat = requete_R($requete);
     return $resultat;
 }
 
 function recuperer_profil_detail($id)
 {
     $requete = "SELECT * FROM utilisateurs WHERE id_utilisateurs = $id";
-    $resultat = requete($requete);
+    $resultat = requete_R($requete);
     return $resultat;
 }
 
@@ -100,5 +99,27 @@ function modifier_profil($id,$nom,$prenom,$date_naissance,$description,$email,$p
                    mot_de_passe_utilisateurs = "$mot_de_passe"
             WHERE  id_utilisateurs = "$id";
 REQUETE;
-    requete_update($requete);
+    requete_CUD($requete);
+}
+
+function supprimer_profil($id)
+{
+    $requete = <<< REQUETE
+            DELETE FROM utilisateurs
+            WHERE id_utilisateurs = "$id";
+REQUETE;
+    requete_CUD($requete);
+    
+}
+
+function verifier_connexion($pseudo, $mdp)
+{
+    $requete = <<< REQUETE
+            SELECT * FROM `utilisateurs` WHERE pseudo_utilisateurs = "$pseudo" AND mot_de_passe_utilisateurs = "$mdp";
+REQUETE;
+    $validation = requete_R($requete);
+    if($validation != NULL)
+    {
+        $_SESSION['connecte'] = TRUE;
+    }
 }

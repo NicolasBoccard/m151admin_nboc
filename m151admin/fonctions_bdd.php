@@ -6,10 +6,11 @@
 require_once('sql.php');
 
 
-/**
+
+/**-----------------------------------------------------------------------------
  * Fonction pour se connecter à la base donées
- * @staticvar type $connexion //Connexion établie ou non
- * @return \PDO
+ * @staticvar type $connexion || Connexion établie ou non
+ * @return \PDO               || Retourne un objet PDO
  */
 function connexion()
 { 
@@ -31,10 +32,13 @@ function connexion()
 }
 
 
-/**
- * Executer les requêtes reçu
- * @param type $requete // Requête à executer
- * @return type
+
+
+
+/**-----------------------------------------------------------------------------
+ * Executer les requêtes SELECT reçu
+ * @param type $requete || Requête à executer
+ * @return type         || Retourne un tableau de données 
  */
 function requete_R($requete)
 {
@@ -43,6 +47,15 @@ function requete_R($requete)
     return $donnees;
 }
 
+
+
+
+
+/**-----------------------------------------------------------------------------
+ * Execute les requêtes CREAT, UPDATE et DELETE reçu
+ * @param type $requete || Requête à executer
+ * @return type         || Retourne un tableau de données
+ */
 function requete_CUD($requete) {
     $bdd = connexion();
     $donnees = $bdd->query($requete);
@@ -50,15 +63,18 @@ function requete_CUD($requete) {
 }
 
 
-/**
+
+
+
+/**-----------------------------------------------------------------------------
  * Fonction qui crée la requête pour insérer un utilisateurs
- * @param type $nom //Nom de l'utilisateur
- * @param type $prenom //Prénom de l'utilisateur
- * @param type $date_naissance //Date de naissance de l'utilisateur
- * @param type $description //Description de l'utilisateur
- * @param type $email //Email de l'utilisateur
- * @param type $pseudo //Pseudo de l'utilisateur
- * @param type $mot_de_passe //Mot de passe de l'utilisateur
+ * @param type $nom            || Nom de l'utilisateur
+ * @param type $prenom         || Prénom de l'utilisateur
+ * @param type $date_naissance || Date de naissance de l'utilisateur
+ * @param type $description    || Description de l'utilisateur
+ * @param type $email          || Email de l'utilisateur
+ * @param type $pseudo         || Pseudo de l'utilisateur
+ * @param type $mot_de_passe   || Mot de passe de l'utilisateur
  */
 function inscription($nom,$prenom,$date_naissance,$description,$email,$pseudo,$mot_de_passe)
 {
@@ -72,6 +88,14 @@ REQUETE;
     requete_CUD($requete);
 }
 
+
+
+
+
+/**-----------------------------------------------------------------------------
+ * Fonction pour récupérer tout les profils de la table utilisateurs
+ * @return type || Retourne un tableau de données
+ */
 function recuperer_profil_general()
 {
     $requete = "SELECT * FROM utilisateurs;";
@@ -79,13 +103,38 @@ function recuperer_profil_general()
     return $resultat;
 }
 
+
+
+
+
+/**-----------------------------------------------------------------------------
+ * Fonction pour récupérer seulement un profil de la table utilisateurs
+ * @param type $id || Id de l'utilisateur
+ * @return type    || Retourne un tableau de données
+ */
 function recuperer_profil_detail($id)
 {
     $requete = "SELECT * FROM utilisateurs WHERE id_utilisateurs = $id";
     $resultat = requete_R($requete);
     return $resultat;
 }
+//------------------------------------------------------------------------------
 
+
+
+
+
+/**-----------------------------------------------------------------------------
+ * Fonction pour modifier le profil d'un utilisateur
+ * @param type $id             || Id de l'utilisateur
+ * @param type $nom            || Nom de l'utilisateur
+ * @param type $prenom         || Prénom de l'utilisateur
+ * @param type $date_naissance || Date de naissance de l'utilisateur
+ * @param type $description    || Description de l'utilisateur
+ * @param type $email          || Email de l'utilisateur
+ * @param type $pseudo         || Pseudo de l'utilisateur
+ * @param type $mot_de_passe   || Mot de passe de l'utilisateur
+ */
 function modifier_profil($id,$nom,$prenom,$date_naissance,$description,$email,$pseudo,$mot_de_passe)
 {
     $requete = <<< REQUETE
@@ -102,6 +151,14 @@ REQUETE;
     requete_CUD($requete);
 }
 
+
+
+
+
+/**-----------------------------------------------------------------------------
+ * Fonction pour supprimer le profil d'un utilisateur
+ * @param type $id || Id de l'utilisateur
+ */
 function supprimer_profil($id)
 {
     $requete = <<< REQUETE
@@ -112,6 +169,15 @@ REQUETE;
     
 }
 
+
+
+
+
+/**-----------------------------------------------------------------------------
+ * Fonction pour vérifier si l'utilisateur existe lors de la connexion
+ * @param type $pseudo || Pseudo de l'utilisateur
+ * @param type $mdp    || Mot de passe de l'utilisateur
+ */
 function verifier_connexion($pseudo, $mdp)
 {
     $requete = <<< REQUETE

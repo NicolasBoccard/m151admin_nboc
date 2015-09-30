@@ -7,6 +7,12 @@
 
 require_once('fonctions_bdd.php');
 
+
+
+/**-----------------------------------------------------------------------------
+ * Fonction qui vérifie si l'on a appuyé sur supprimer, détails ou rien
+ * @param type $tableau || Tableau contenant tout les profils
+ */
 function afficher_profil($tableau)
 {
     $profil_choisit = FALSE;

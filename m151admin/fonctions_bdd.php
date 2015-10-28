@@ -187,5 +187,25 @@ REQUETE;
     if($validation != NULL)
     {
         $_SESSION['connecte'] = TRUE;
+        $_SESSION['id_utilisateurs'] = $validation[0][0];
     }
+}
+
+
+
+
+
+/**
+ * Fonction pour verifier si la personne connectée est un admin ou un utilisateur
+ * @param type $id || Id de la personne
+ * @return boolean || Retourne un booléen
+ */
+function verifier_admin($id)
+{
+    $resultat = recuperer_profil_detail($id);
+    if ($resultat[0][8] == 1)
+        $admin = TRUE;
+    else
+        $admin = FALSE;
+    return $admin;
 }

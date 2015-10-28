@@ -53,14 +53,9 @@ function afficher_profil_general($tableau)
             }
             echo "<td>"
             .    "<a id=\"btn_profil\" href=\"profil.php?id_user=" . $tableau[$i][0] . "\">détail</a>"
-            .    "</td>"
-            .    "<td>"
-            .    "<a id=\"btn_profil\" href=\"inscription.php?id_user=" . $tableau[$i][0] . "\">modifier</a>"
-            .    "</td>"
-            .    "<td>"
-            .    "<a id=\"btn_profil\" href=\"profil.php?id_user=" . $tableau[$i][0] . "&action=supprimer\">supprimer</a>"
-            .    "</td>"
-            .    "</tr>";
+            .    "</td>";
+            $admin = verifier_admin($_SESSION['id_utilisateurs']);
+            afficher_btn_modifier_supprimer($admin, $tableau[$i][0]);
             echo "</tr>";
         }
 }
@@ -87,4 +82,33 @@ function afficher_profil_detail($id)
     echo "</td>";
     echo "</tr>";
     echo "</table\">";
+}
+
+function afficher_btn_modifier_supprimer($admin, $id)
+{
+    if ($admin == TRUE)
+    {
+        echo "<td>"
+            . "<a id=\"btn_profil\" href=\"inscription.php?id_user=" . $id . "\">modifier</a>"
+            . "</td>"
+            . "<td>"
+            . "<a id=\"btn_profil\" href=\"profil.php?id_user=" . $id . "&action=supprimer\">supprimer</a>"
+            . "</td>";
+    }
+    else
+    {
+        if ($id == $_SESSION['id_utilisateurs'])
+                {
+                echo "<td>"
+                . "<a id=\"btn_profil\" href=\"inscription.php?id_user=" . $id . "\">modifier</a>"
+                . "</td>"
+                . "<td>"
+                . "<a id=\"btn_profil\" href=\"profil.php?id_user=" . $id . "&action=supprimer\">supprimer</a>"
+                . "</td>";
+                }
+            else
+                {
+                    echo "<td></td><td></td>";
+                }
+    }
 }

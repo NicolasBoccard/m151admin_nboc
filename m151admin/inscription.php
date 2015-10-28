@@ -100,7 +100,8 @@ if(isset($_REQUEST['id_user']))
                 <?php } else{?>
                 <input id="a" type="submit" name="modification" value="Modifier"/>
                 <a id="annuler_modification" href="profil.php">Annuler<a/>
-                <?php }?>
+                <?php }               
+                ?>
             </form>
         </div>
     </body>

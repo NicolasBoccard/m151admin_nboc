@@ -78,14 +78,22 @@ function requete_CUD($requete) {
  */
 function inscription($nom,$prenom,$date_naissance,$description,$email,$pseudo,$mot_de_passe)
 {
-    $requete = <<< REQUETE
-            INSERT INTO utilisateurs(nom_utilisateurs, prenom_utilisateurs,
-            date_de_naissance_utilisateurs, description_utilisateurs,
-            email_utilisateurs, pseudo_utilisateurs, mot_de_passe_utilisateurs)
-            VALUES("$nom", "$prenom", "$date_naissance", 
-            "$description", "$email", "$pseudo", "$mot_de_passe");
+    $resultat = verifier_pseudo($pseudo);
+    if ($resultat == NULL)
+    {
+        $requete = <<< REQUETE
+                INSERT INTO utilisateurs(nom_utilisateurs, prenom_utilisateurs,
+                date_de_naissance_utilisateurs, description_utilisateurs,
+                email_utilisateurs, pseudo_utilisateurs, mot_de_passe_utilisateurs)
+                VALUES("$nom", "$prenom", "$date_naissance", 
+                "$description", "$email", "$pseudo", "$mot_de_passe");
 REQUETE;
-    requete_CUD($requete);
+        requete_CUD($requete);
+    }
+    else
+    {
+        echo "Ce pseudonyme existe déja veuillez choisir un autre.";
+    }
 }
 
 
@@ -208,4 +216,22 @@ function verifier_admin($id)
     else
         $admin = FALSE;
     return $admin;
+}
+
+
+
+
+
+/**
+ * Fonction qui vérifie si le pseudo existe déja dans la base de données
+ * @param type $pseudo || Pseudo choisit par la personne
+ * @return type || Retourne soit un tableau soit NULL
+ */
+function verifier_pseudo($pseudo)
+{
+    $requete = <<< REQUETE
+                SELECT * FROM utilisateurs WHERE pseudo_utilisateurs = "$pseudo";
+REQUETE;
+    $resultat = requete_R($requete);
+    return $resultat;
 }

@@ -8,6 +8,7 @@ session_start();
 
 require_once('fonctions_bdd.php');
 $modification = FALSE;
+$admin = FALSE;
 if(isset($_REQUEST['annuler']))
 {
     header('Location: profil.php');
@@ -21,15 +22,27 @@ if(isset($_REQUEST['inscription']))
 
 if(isset($_REQUEST['modification']))
 {
-    modifier_profil($_REQUEST['id'], $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_naissance'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['pseudo'], md5($_REQUEST['mot_de_passe']));
+    modifier_profil($_REQUEST['id'], $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_naissance'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['pseudo'], md5($_REQUEST['mot_de_passe']), $_REQUEST['admin']);
     header('Location: profil.php?' . $_REQUEST['id']);
 }
 
 if(isset($_REQUEST['id_user']))
 {
+    if(verifier_admin($_SESSION['id_utilisateurs']) == FALSE)
+{
+    if(recuperer_profil_detail($_REQUEST['id_user']) == NULL || $_SESSION['id_utilisateurs'] != $_REQUEST['id_user'])
+{
+    header('Location: profil.php');
+}
+}
+else
+{
+    $admin = TRUE;
+}
     $modification = TRUE;
     $tableau = recuperer_profil_detail($_REQUEST['id_user']);
 }
+
 }
 ?>
 
@@ -91,17 +104,43 @@ if(isset($_REQUEST['id_user']))
                 <input type="password" id="mot_de_passe" name="mot_de_passe" required/><br/>
                 <?php } else{?>
                 <input type="password" id="mot_de_passe" name="mot_de_passe" value=<?php echo "\"" . $tableau[0][7] . "\"";?> required/><br/>
-                <?php }?>
+                <?php }
                 
-                <?php if($modification == FALSE){?>
+                if($admin == TRUE)
+                {?>
+                <label for="admin">Administrateur</label>
+                <?php
+                if(verifier_admin($_REQUEST['id_user']) == TRUE)
+                {
+                ?>
+                <input type="radio" name="admin" value="1" checked="checked" /><br/>
+                <input type="radio" name="admin" value="0"/>
+                <?php
+                }
+                else
+                {
+                ?>
+                <input type="radio" name="admin" value="1"/><br/>
+                <input type="radio" name="admin" value="0" checked="checked"/>
+                <?php
+                }
+                ?>
+                <label for="admin">Utilisateur</label><br/>
+                <?php}
+                if($modification == FALSE)
+                {
+                ?>
                 <input type="submit" name="inscription" value="Inscription"/>
                 <input type="reset" name="effacer" value="Effacer"/>
                 <a id="annuler_inscription" href="index.php">Annuler<a/>
-                <?php } else{?>
+                <?php
+                } 
+                else
+                {
+                ?>
                 <input id="a" type="submit" name="modification" value="Modifier"/>
                 <a id="annuler_modification" href="profil.php">Annuler<a/>
-                <?php }               
-                ?>
+                <?php }?>
             </form>
         </div>
     </body>

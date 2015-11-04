@@ -10,7 +10,7 @@ require_once('fonction_affichage.php');
 
 $tableau_profil = recuperer_profil_general();
 
-if(isset($_SESSION['connecte']) && !$_SESSION['connecte'])
+if(empty($_SESSION['connecte']))
 {
     header('Location: index.php');
 }

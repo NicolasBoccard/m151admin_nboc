@@ -143,7 +143,7 @@ function recuperer_profil_detail($id)
  * @param type $pseudo         || Pseudo de l'utilisateur
  * @param type $mot_de_passe   || Mot de passe de l'utilisateur
  */
-function modifier_profil($id,$nom,$prenom,$date_naissance,$description,$email,$pseudo,$mot_de_passe)
+function modifier_profil($id,$nom,$prenom,$date_naissance,$description,$email,$pseudo,$mot_de_passe,$pouvoir)
 {
     $requete = <<< REQUETE
             UPDATE utilisateurs 
@@ -154,6 +154,7 @@ function modifier_profil($id,$nom,$prenom,$date_naissance,$description,$email,$p
                    email_utilisateurs = "$email",
                    pseudo_utilisateurs = "$pseudo",
                    mot_de_passe_utilisateurs = "$mot_de_passe"
+                   statut_utilisateurs = "$pouvoir"
             WHERE  id_utilisateurs = "$id";
 REQUETE;
     requete_CUD($requete);
@@ -174,6 +175,7 @@ function supprimer_profil($id)
             WHERE id_utilisateurs = "$id";
 REQUETE;
     requete_CUD($requete);
+    header('Location: deconnexion.php');
     
 }
 
@@ -196,6 +198,7 @@ REQUETE;
     {
         $_SESSION['connecte'] = TRUE;
         $_SESSION['id_utilisateurs'] = $validation[0][0];
+        $_SESSION['pouvoir'] = $validation[0][8];
     }
 }
 

@@ -196,6 +196,8 @@ REQUETE;
     $validation = requete_R($requete);
     if($validation != NULL)
     {
+		//attention ne pas mettre les infos de session dans une fonction qui traite avec la BD, 
+		//on essaie de séparer, vous l'avez très bien fait avec le reste du code
         $_SESSION['connecte'] = TRUE;
         $_SESSION['id_utilisateurs'] = $validation[0][0];
         $_SESSION['pouvoir'] = $validation[0][8];

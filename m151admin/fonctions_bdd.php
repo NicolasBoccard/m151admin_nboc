@@ -92,7 +92,7 @@ REQUETE;
     }
     else
     {
-        echo "Ce pseudonyme existe déja veuillez choisir un autre.";
+        echo "Ce pseudonyme existe déja veuillez en choisir un autre.";
     }
 }
 
@@ -153,7 +153,7 @@ function modifier_profil($id,$nom,$prenom,$date_naissance,$description,$email,$p
                    description_utilisateurs = "$description",
                    email_utilisateurs = "$email",
                    pseudo_utilisateurs = "$pseudo",
-                   mot_de_passe_utilisateurs = "$mot_de_passe"
+                   mot_de_passe_utilisateurs = "$mot_de_passe",
                    statut_utilisateurs = "$pouvoir"
             WHERE  id_utilisateurs = "$id";
 REQUETE;
@@ -198,10 +198,15 @@ REQUETE;
     {
 		//attention ne pas mettre les infos de session dans une fonction qui traite avec la BD, 
 		//on essaie de séparer, vous l'avez très bien fait avec le reste du code
-        $_SESSION['connecte'] = TRUE;
-        $_SESSION['id_utilisateurs'] = $validation[0][0];
-        $_SESSION['pouvoir'] = $validation[0][8];
+        $tableau = array(
+            "connecte"        => TRUE,
+            "id_utilisateurs" => $validation[0][0],
+            "pouvoir"         => $validation[0][8]
+        );
     }
+    else
+        $tableau = array("connecte" => FALSE);
+    return $tableau;
 }
 
 

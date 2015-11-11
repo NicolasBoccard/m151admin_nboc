@@ -10,7 +10,13 @@ require_once('fonction_affichage.php');
 
 if(isset($_REQUEST['connexion']))
 {
-    verifier_connexion($_REQUEST['pseudo'], md5($_REQUEST['mdp']));
+    $tableau = verifier_connexion($_REQUEST['pseudo'], md5($_REQUEST['mdp']));
+    if($tableau['connecte'] == TRUE)
+    {
+        $_SESSION['connecte'] = $tableau['connecte'];
+        $_SESSION['id_utilisateurs'] = $tableau['id_utilisateurs'];
+        $_SESSION['pouvoir'] = $tableau['pouvoir'];
+    }
 }
 
 if(isset($_SESSION['connecte']) && $_SESSION['connecte'])

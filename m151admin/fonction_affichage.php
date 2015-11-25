@@ -103,3 +103,16 @@ function afficher_btn_modifier_supprimer($admin, $id) {
         }
     }
 }
+
+function afficherSports() {
+    $sports = recuperer_sports();
+    echo 'Bonjour';
+    var_dump($sports);
+    
+    for ($i = 0; $i < count($sports); $i++)
+    {
+        echo "<option>";
+        echo $sports[$i][1];
+        echo "</option>";
+    }
+}

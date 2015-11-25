@@ -230,3 +230,11 @@ REQUETE;
         return NULL;
     }
 }
+
+function recuperer_sports() {
+    $requete = <<< REQUETE
+            SELECT * FROM sports;
+REQUETE;
+    $resultat = requete_R($requete);
+    return $resultat;
+}

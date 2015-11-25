@@ -25,7 +25,8 @@ if (isset($_REQUEST['annuler'])) {
     header('Location: profil.php');
 } else {
     if (isset($_REQUEST['inscription'])) {
-        inscription($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_naissance'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['pseudo'], md5($_REQUEST['mot_de_passe']));
+        $classe = afficher_classes_detail($_REQUEST['classe']);
+        inscription($_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_naissance'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['pseudo'], md5($_REQUEST['mot_de_passe']), $classe[0][0]);
     }
 
     if (isset($_REQUEST['modification'])) {
@@ -53,6 +54,7 @@ if (isset($_REQUEST['annuler'])) {
         $pseudo = $tableau[0][6];
         $mdp = $tableau[0][7];
     }
+    $classe = afficher_classes();
 }
 ?>
 
@@ -87,6 +89,16 @@ if (isset($_REQUEST['annuler'])) {
 
                 <label for="mot_de_passe">Mot de passe :</label>
                 <input type="password" id="mot_de_passe" name="mot_de_passe" value="<?= $mdp ?>" required/><br/>
+                
+                <label for="">Classe :</label>
+                <select name="classe">
+                        <?php
+                        for ($i = 0; $i < count($classe[0]); $i++)
+                        {
+                            ?> <option><?=$classe[$i][1];?></option><?php
+                        }
+                        ?>
+                </select><br/>
 
                 <?php
                 if ($admin == TRUE) {

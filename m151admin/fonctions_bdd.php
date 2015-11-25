@@ -76,7 +76,7 @@ function requete_CUD($requete) {
  * @param type $pseudo         || Pseudo de l'utilisateur
  * @param type $mot_de_passe   || Mot de passe de l'utilisateur
  */
-function inscription($nom,$prenom,$date_naissance,$description,$email,$pseudo,$mot_de_passe)
+function inscription($nom,$prenom,$date_naissance,$description,$email,$pseudo,$mot_de_passe,$classe)
 {
     $resultat = verifier_pseudo($pseudo);
     if ($resultat == NULL)
@@ -84,9 +84,9 @@ function inscription($nom,$prenom,$date_naissance,$description,$email,$pseudo,$m
         $requete = <<< REQUETE
                 INSERT INTO utilisateurs(nom_utilisateurs, prenom_utilisateurs,
                 date_de_naissance_utilisateurs, description_utilisateurs,
-                email_utilisateurs, pseudo_utilisateurs, mot_de_passe_utilisateurs)
+                email_utilisateurs, pseudo_utilisateurs, mot_de_passe_utilisateurs, id_classes)
                 VALUES("$nom", "$prenom", "$date_naissance", 
-                "$description", "$email", "$pseudo", "$mot_de_passe");
+                "$description", "$email", "$pseudo", "$mot_de_passe", "$classe");
 REQUETE;
         requete_CUD($requete);
     }
@@ -241,6 +241,25 @@ function verifier_pseudo($pseudo)
 {
     $requete = <<< REQUETE
                 SELECT * FROM utilisateurs WHERE pseudo_utilisateurs = "$pseudo";
+REQUETE;
+    $resultat = requete_R($requete);
+    return $resultat;
+}
+
+
+function afficher_classes()
+{
+    $requete = <<< REQUETE
+            SELECT * FROM classes;
+REQUETE;
+    $resultat = requete_R($requete);
+    return $resultat;
+}
+
+
+function afficher_classes_detail($classe) {
+    $requete = <<< REQUETE
+            SELECT * FROM classes WHERE nom_classes = "$classe";
 REQUETE;
     $resultat = requete_R($requete);
     return $resultat;

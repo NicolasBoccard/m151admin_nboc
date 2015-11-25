@@ -31,7 +31,15 @@ if (isset($_REQUEST['annuler'])) {
 
     if (isset($_REQUEST['modification'])) {
         $_REQUEST['mot_de_passe'] = ($_REQUEST['mot_de_passe'] == "") ? recuperer_profil_detail($_REQUEST['id'])[0][7] : md5($_REQUEST['mot_de_passe']);
-        modifier_profil($_REQUEST['id'], $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_naissance'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['pseudo'], $_REQUEST['mot_de_passe'], $_REQUEST['admin']);
+        if(isset($_REQUEST['classe']))
+        {
+            $_REQUEST['classe'] = afficher_classes_detail($_REQUEST['classe'])[0][0];
+        }
+        else
+        {
+            $_REQUEST['classe'] == NULL;
+        }
+        modifier_profil($_REQUEST['id'], $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_naissance'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['pseudo'], $_REQUEST['mot_de_passe'], $_REQUEST['admin'], $_REQUEST['classe']);
         header('Location: profil.php?' . $_REQUEST['id']);
     }
 
@@ -89,18 +97,7 @@ if (isset($_REQUEST['annuler'])) {
 
                 <label for="mot_de_passe">Mot de passe :</label>
                 <input type="password" id="mot_de_passe" name="mot_de_passe" value="<?= $mdp ?>" required/><br/>
-                
-                <label for="">Classe :</label>
-                <select name="classe">
-                        <?php
-                        for ($i = 0; $i < count($classe[0]); $i++)
-                        {
-                            ?> <option><?=$classe[$i][1];?></option><?php
-                        }
-                        ?>
-                </select><br/>
-
-                <?php
+                    <?php
                 if ($admin == TRUE) {
                     ?>
                     <label for="admin">Administrateur</label>
@@ -120,17 +117,30 @@ if (isset($_REQUEST['annuler'])) {
                     <label for="admin">Utilisateur</label><br/>
                     <?php
                 }
-                if ($modification == FALSE) {
+                    if ($_REQUEST['id_user'] != $_SESSION['id_utilisateurs']) {
+                        ?>
+                    <label for="">Classe :</label>
+                <select name="classe">
+                    <?php
+                    for ($i = 0; $i < count($classe[0]); $i++) {
+                        ?> 
+                        <option><?= $classe[$i][1]; ?></option>
+                    <?php }
                     ?>
+                    </select><br/>
+    <?php
+                    }
+if ($modification == FALSE) {
+    ?>
                     <input type="submit" name="inscription" value="Inscription"/>
                     <input type="reset" name="effacer" value="Effacer"/>
                     <a id="annuler_inscription" href="index.php">Annuler<a/>
-                        <?php
-                    } else {
-                        ?>
+    <?php
+} else {
+    ?>
                         <input id="a" type="submit" name="modification" value="Modifier"/>
                         <a id="annuler_modification" href="profil.php">Annuler<a/>
-                        <?php } ?>
+<?php } ?>
                         </form>
                         </div>
                         </body>

@@ -37,7 +37,7 @@ if (isset($_REQUEST['annuler'])) {
         }
         else
         {
-            $_REQUEST['classe'] == NULL;
+            $_REQUEST['classe'] = NULL;
         }
         modifier_profil($_REQUEST['id'], $_REQUEST['nom'], $_REQUEST['prenom'], $_REQUEST['date_naissance'], $_REQUEST['description'], $_REQUEST['email'], $_REQUEST['pseudo'], $_REQUEST['mot_de_passe'], $_REQUEST['admin'], $_REQUEST['classe']);
         header('Location: profil.php?' . $_REQUEST['id']);
@@ -96,8 +96,11 @@ if (isset($_REQUEST['annuler'])) {
                 <input type="text" id="pseudo" name="pseudo" value="<?= $pseudo ?>" required/><br/>
 
                 <label for="mot_de_passe">Mot de passe :</label>
-                <input type="password" id="mot_de_passe" name="mot_de_passe" value="<?= $mdp ?>" required/><br/>
-                    <?php
+                <?php if(isset($_REQUEST['id_user'])){
+                echo "<input type=\"password\" id=\"mot_de_passe\" name=\"mot_de_passe\" value=\"\"/><br/>";
+                }else{
+                echo "<input type=\"password\" id=\"mot_de_passe\" name=\"mot_de_passe\" value=\"\" required/><br/>";
+                }
                 if ($admin == TRUE) {
                     ?>
                     <label for="admin">Administrateur</label>
@@ -117,7 +120,7 @@ if (isset($_REQUEST['annuler'])) {
                     <label for="admin">Utilisateur</label><br/>
                     <?php
                 }
-                    if ($_REQUEST['id_user'] != $_SESSION['id_utilisateurs']) {
+                    if (isset($_REQUEST['id_user']) && isset($_SESSION['id_utilisateurs'])  && $_REQUEST['id_user'] != $_SESSION['id_utilisateurs']) {
                         ?>
                     <label for="">Classe :</label>
                 <select name="classe">

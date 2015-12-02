@@ -28,7 +28,7 @@ require_once('fonction_affichage.php');
                         </td>
                         <td>
                             <select name="sport1">
-                                <?php afficherSports() ?>
+                                <?=afficherSports() ?>
                             </select>
                         </td>
                     </tr>
@@ -38,10 +38,7 @@ require_once('fonction_affichage.php');
                         </td>
                         <td>
                             <select name="sport2">
-                                <option>Hockey sur glace</option>
-                                <option>Football</option>
-                                <option>Basketball</option>
-                                <option>Baéball</option>
+                                <?=afficherSports() ?>
                             </select>
                         </td>
                     </tr>
@@ -51,10 +48,7 @@ require_once('fonction_affichage.php');
                         </td>
                         <td>
                             <select name="sport3">
-                                <option>Hockey sur glace</option>
-                                <option>Football</option>
-                                <option>Basketball</option>
-                                <option>Baseball</option>
+                                <?=afficherSports() ?>
                             </select>
                         </td>
                     </tr>
@@ -64,10 +58,7 @@ require_once('fonction_affichage.php');
                         </td>
                         <td>
                             <select name="sport4">
-                                <option>Hockey sur glace</option>
-                                <option>Football</option>
-                                <option>Basketball</option>
-                                <option>Baseball</option>
+                                <?=afficherSports() ?>
                             </select>
                         </td>
                     </tr>

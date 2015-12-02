@@ -120,7 +120,23 @@ function recuperer_profil_detail($id) {
  * @param type $mot_de_passe   || Mot de passe de l'utilisateur
  */
 function modifier_profil($id, $nom, $prenom, $date_naissance, $description, $email, $pseudo, $mot_de_passe, $pouvoir, $classe) {
-    $requete = <<< REQUETE
+    if($classe == NULL)
+    {
+        $requete = <<< REQUETE
+                UPDATE utilisateurs 
+            SET    nom_utilisateurs = "$nom",
+                   prenom_utilisateurs = "$prenom",
+                   date_de_naissance_utilisateurs = "$date_naissance",
+                   description_utilisateurs = "$description",
+                   email_utilisateurs = "$email",
+                   pseudo_utilisateurs = "$pseudo",
+                   mot_de_passe_utilisateurs = "$mot_de_passe",
+                   statut_utilisateurs = "$pouvoir",
+                   id_classes = NULL
+            WHERE  id_utilisateurs = "$id";
+REQUETE;
+    }else{
+        $requete = <<< REQUETE
             UPDATE utilisateurs 
             SET    nom_utilisateurs = "$nom",
                    prenom_utilisateurs = "$prenom",
@@ -133,6 +149,7 @@ function modifier_profil($id, $nom, $prenom, $date_naissance, $description, $ema
                    id_classes = "$classe"
             WHERE  id_utilisateurs = "$id";
 REQUETE;
+    }
     requete_CUD($requete);
 }
 

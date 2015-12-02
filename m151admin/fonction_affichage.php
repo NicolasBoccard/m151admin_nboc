@@ -45,7 +45,7 @@ function afficher_profil_general($tableau) {
         . "<a id=\"btn_profil\" href=\"profil.php?id_user=" . $tableau[$i][0] . "\">détail</a>"
         . "</td>";
         $admin = verifier_admin($_SESSION['id_utilisateurs']);
-        afficher_btn_modifier_supprimer($admin, $tableau[$i][0]);
+        afficher_btn_modifier_supprimer_sports($admin, $tableau[$i][0]);
         echo "</tr>";
     }
 }
@@ -82,7 +82,7 @@ function afficher_profil_detail($id) {
     echo "</table\">";
 }
 
-function afficher_btn_modifier_supprimer($admin, $id) {
+function afficher_btn_modifier_supprimer_sports($admin, $id) {
     if ($admin == TRUE) {
         echo "<td>"
         . "<a id=\"btn_profil\" href=\"inscription.php?id_user=" . $id . "\">modifier</a>"
@@ -97,6 +97,9 @@ function afficher_btn_modifier_supprimer($admin, $id) {
             . "</td>"
             . "<td>"
             . "<a id=\"btn_profil\" href=\"profil.php?id_user=" . $id . "&action=supprimer\">supprimer</a>"
+            . "</td>"
+            . "<td>"
+            . "<a id=\"btn_profil\" href=\"sports.php?id_user=" . $id ." \">sports</a>"
             . "</td>";
         } else {
             echo "<td></td><td></td>";
